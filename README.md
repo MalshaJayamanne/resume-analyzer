@@ -129,6 +129,7 @@ app/ml/vectorizer.pkl
 ### 🔹 6. Run Backend Server
 
 ```bash
+cd backend
 uvicorn app.main:app --reload
 ```
 
@@ -224,17 +225,6 @@ Run:
 ```bash
 uvicorn app.main:app --reload
 
-```
-
----
-
-### ❌ No space left on device
-
-* Clear temp files
-* Run:
-
-```bash
-pip cache purge
 ```
 
 ---

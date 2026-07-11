@@ -8,22 +8,50 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Load and pre-process data once
-# Optimization: Only load a subset if the file is massive, or load everything but handle it safely
-try:
-    logger.info("Loading job postings data...")
-    # Loading 10k rows for performance, as 516MB is too much for a basic reloader setup
-    df = pd.read_csv("data/postings.csv", nrows=10000) 
-    df = df[["title", "description"]].dropna().reset_index(drop=True)
-    df["text"] = df["title"] + " " + df["description"]
-    
-    logger.info(f"Pre-calculating job vectors for {len(df)} postings...")
-    job_vecs = vectorizer.transform(df["text"])
-    logger.info("Job vectors pre-calculated successfully.")
-except Exception as e:
-    logger.error(f"Error loading job data: {e}")
-    df = pd.DataFrame(columns=["title", "description", "text"])
-    job_vecs = None
+import os
+import pickle
+
+cache_path = "app/ml/job_data_cache.pkl"
+csv_path = "data/postings.csv"
+vec_path = "app/ml/vectorizer.pkl"
+
+use_cache = False
+if os.path.exists(cache_path) and os.path.exists(csv_path) and os.path.exists(vec_path):
+    cache_mtime = os.path.getmtime(cache_path)
+    if cache_mtime > os.path.getmtime(csv_path) and cache_mtime > os.path.getmtime(vec_path):
+        use_cache = True
+
+if use_cache:
+    try:
+        logger.info("Loading pre-calculated job vectors and data from cache...")
+        with open(cache_path, "rb") as f:
+            cache_data = pickle.load(f)
+            df = cache_data["df"]
+            job_vecs = cache_data["job_vecs"]
+        logger.info("Loaded job data from cache successfully.")
+    except Exception as e:
+        logger.error(f"Failed to load cache: {e}. Re-calculating...")
+        use_cache = False
+
+if not use_cache:
+    try:
+        logger.info("Loading job postings data...")
+        df = pd.read_csv(csv_path, nrows=10000) 
+        df = df[["title", "description"]].dropna().reset_index(drop=True)
+        df["text"] = df["title"] + " " + df["description"]
+        
+        logger.info(f"Pre-calculating job vectors for {len(df)} postings...")
+        job_vecs = vectorizer.transform(df["text"])
+        logger.info("Job vectors pre-calculated successfully.")
+        
+        logger.info("Saving pre-calculated job data to cache...")
+        with open(cache_path, "wb") as f:
+            pickle.dump({"df": df, "job_vecs": job_vecs}, f)
+        logger.info("Cache saved successfully.")
+    except Exception as e:
+        logger.error(f"Error loading job data: {e}")
+        df = pd.DataFrame(columns=["title", "description", "text"])
+        job_vecs = None
 
 # Comprehensive skills list
 SKILLS_LIST = [

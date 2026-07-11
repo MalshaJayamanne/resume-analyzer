@@ -12,42 +12,42 @@ export default function JobCard({ job, index }) {
     >
       <div className="flex justify-between items-start">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shadow-inner">
+          <div className="w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center shadow-inner">
             <Briefcase size={24} />
           </div>
           <div>
-            <h3 className="font-bold text-xl text-gray-900 leading-tight mb-1">{job.title}</h3>
-            <div className="flex items-center gap-2 text-sm text-gray-400 font-medium">
+            <h3 className="font-bold text-xl text-gray-900 dark:text-white leading-tight mb-1">{job.title}</h3>
+            <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500 font-medium">
               <span>Full Time</span>
-              <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+              <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-700"></span>
               <span>Remote</span>
-              <span className="w-1 h-1 rounded-full bg-gray-300"></span>
+              <span className="w-1 h-1 rounded-full bg-gray-300 dark:bg-slate-700"></span>
               <span>$120k - $150k</span>
             </div>
           </div>
         </div>
         <div className="text-right flex flex-col items-end">
-          <div className="px-4 py-2 rounded-2xl bg-blue-600 text-white font-black text-xl shadow-lg shadow-blue-200">
+          <div className="px-4 py-2 rounded-2xl bg-blue-600 text-white font-black text-xl shadow-lg shadow-blue-200 dark:shadow-none">
             {job.score.toFixed(0)}%
           </div>
-          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-2">Match</span>
+          <span className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-2">Match</span>
         </div>
       </div>
 
-      <p className="text-gray-500 leading-relaxed">
+      <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
         {job.description || "Leverage your expertise to drive innovation in this high-impact role. You'll collaborate with cross-functional teams to deliver exceptional solutions."}
       </p>
 
       <div className="space-y-4">
         {job.matched_skills.length > 0 && (
           <div className="space-y-2">
-            <p className="text-xs font-bold text-emerald-600 uppercase tracking-wider flex items-center gap-2">
+            <p className="text-xs font-bold text-emerald-600 dark:text-emerald-500 uppercase tracking-wider flex items-center gap-2">
               <CheckCircle2 size={14} />
               Key Match Skills
             </p>
             <div className="flex flex-wrap gap-2">
               {job.matched_skills.map(skill => (
-                <span key={skill} className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-100">
+                <span key={skill} className="px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold border border-emerald-100 dark:border-emerald-900/40">
                   {skill}
                 </span>
               ))}
@@ -57,13 +57,13 @@ export default function JobCard({ job, index }) {
 
         {job.missing_skills.length > 0 && (
           <div className="space-y-2">
-            <p className="text-xs font-bold text-amber-600 uppercase tracking-wider flex items-center gap-2">
+            <p className="text-xs font-bold text-amber-600 dark:text-amber-500 uppercase tracking-wider flex items-center gap-2">
               <AlertCircle size={14} />
               Growth Areas
             </p>
             <div className="flex flex-wrap gap-2">
               {job.missing_skills.map(skill => (
-                <span key={skill} className="px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 text-xs font-bold border border-amber-100">
+                <span key={skill} className="px-3 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/30 text-amber-700 dark:text-amber-400 text-xs font-bold border border-amber-100 dark:border-amber-900/40">
                   {skill}
                 </span>
               ))}
@@ -72,11 +72,11 @@ export default function JobCard({ job, index }) {
         )}
       </div>
 
-      <div className="mt-auto pt-6 border-t border-gray-50 flex items-center justify-between">
-        <button className="text-sm font-bold text-blue-600 hover:text-blue-700 flex items-center gap-2 transition-colors">
+      <div className="mt-auto pt-6 border-t border-gray-50 dark:border-slate-800 flex items-center justify-between">
+        <button className="text-sm font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-2 transition-colors">
           View Detailed Report <ChevronRight size={18} />
         </button>
-        <button className="p-2 rounded-xl bg-gray-50 text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-all">
+        <button className="p-2 rounded-xl bg-gray-50 dark:bg-slate-800 text-gray-400 dark:text-gray-500 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-blue-600 dark:hover:text-blue-400 transition-all">
           <ExternalLink size={18} />
         </button>
       </div>

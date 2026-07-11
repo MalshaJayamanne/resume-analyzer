@@ -81,16 +81,16 @@ export default function UploadResume({ setResult }) {
               y: isDragging ? -10 : 0,
               scale: isDragging ? 1.1 : 1
             }}
-            className="w-24 h-24 rounded-3xl bg-blue-50 flex items-center justify-center text-blue-600 shadow-inner"
+            className="w-24 h-24 rounded-3xl bg-blue-50 dark:bg-blue-950/40 flex items-center justify-center text-blue-600 dark:text-blue-400 shadow-inner"
           >
             {file ? <FileText size={48} /> : <Upload size={48} />}
           </motion.div>
 
           <div className="space-y-3">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
               {file ? file.name : "Upload your Resume"}
             </h2>
-            <p className="text-gray-500 text-lg max-w-md mx-auto">
+            <p className="text-gray-500 dark:text-gray-400 text-lg max-w-md mx-auto">
               {file 
                 ? `${(file.size / 1024 / 1024).toFixed(2)} MB • Ready to be analyzed by AI`
                 : "Experience the power of AI analysis. Drag and drop your PDF here."}
@@ -137,7 +137,7 @@ export default function UploadResume({ setResult }) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="mt-8 p-4 rounded-2xl bg-red-50 border border-red-100 text-red-600 flex items-center gap-3 justify-center"
+              className="mt-8 p-4 rounded-2xl bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 text-red-600 dark:text-red-450 flex items-center gap-3 justify-center"
             >
               <AlertCircle size={20} />
               <span className="text-sm font-semibold">{error}</span>
@@ -146,7 +146,7 @@ export default function UploadResume({ setResult }) {
         </AnimatePresence>
       </motion.div>
       
-      <p className="mt-8 text-center text-gray-400 text-sm">
+      <p className="mt-8 text-center text-gray-400 dark:text-gray-500 text-sm">
         Supported format: PDF (Max 10MB)
       </p>
     </div>

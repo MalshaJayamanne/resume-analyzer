@@ -68,4 +68,32 @@ body {
 .premium-button:active {
   transform: translateY(0);
 }
+
+.dark {
+  --background: #090d16;
+  --foreground: #f8fafc;
+  --muted: #151f32;
+  --muted-foreground: #94a3b8;
+  --popover: #0d1527;
+  --popover-foreground: #f8fafc;
+  --card: #0f172a;
+  --card-foreground: #f8fafc;
+  --border: #1e293b;
+  --input: #1e293b;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #151f32;
+  --secondary-foreground: #f8fafc;
+  --accent: #1e293b;
+  --accent-foreground: #60a5fa;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --ring: rgba(59, 130, 246, 0.2);
+  
+  --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  --gradient-subtle: linear-gradient(135deg, #0d1527 0%, #090d16 100%);
+  --shadow-premium: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  --glass-bg: rgba(15, 23, 42, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.05);
+}
 
