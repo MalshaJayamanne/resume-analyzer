@@ -2,9 +2,10 @@ import { Home, Briefcase, Settings, Users, BarChart2, LogOut, LayoutDashboard, S
 import { motion } from "framer-motion";
 import ThemeToggle from "../components/ThemeToggle";
 
-const NavItem = ({ icon: Icon, label, active = false }) => (
+const NavItem = ({ icon: Icon, label, active = false, onClick }) => (
   <motion.div
     whileHover={{ x: 5 }}
+    onClick={onClick}
     className={`flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all duration-200 ${
       active 
         ? "bg-white/10 text-blue-400 font-semibold shadow-sm border border-white/5" 
@@ -16,7 +17,7 @@ const NavItem = ({ icon: Icon, label, active = false }) => (
   </motion.div>
 );
 
-export default function Sidebar() {
+export default function Sidebar({ activeTab, setActiveTab }) {
   return (
     <div className="h-screen w-72 bg-gradient-to-b from-slate-950 via-slate-900 to-indigo-950 border-r border-white/5 p-6 flex flex-col relative overflow-hidden shrink-0">
       {/* Dynamic Background Pattern */}
@@ -49,10 +50,18 @@ export default function Sidebar() {
 
           {/* Navigation */}
           <nav className="space-y-2">
-            <NavItem icon={LayoutDashboard} label="Dashboard" active={true} />
-            <NavItem icon={Briefcase} label="Jobs Database" />
-            <NavItem icon={BarChart2} label="Skill Mapping" />
-            <NavItem icon={Settings} label="Settings" />
+            <NavItem 
+              icon={LayoutDashboard} 
+              label="Dashboard" 
+              active={activeTab === "dashboard"} 
+              onClick={() => setActiveTab("dashboard")}
+            />
+            <NavItem 
+              icon={BarChart2} 
+              label="Analytics Dashboard" 
+              active={activeTab === "analytics"} 
+              onClick={() => setActiveTab("analytics")}
+            />
           </nav>
         </div>
 

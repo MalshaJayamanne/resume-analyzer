@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Briefcase, CheckCircle2, AlertCircle, ChevronRight, ExternalLink } from "lucide-react";
+import { Briefcase, CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function JobCard({ job, index }) {
   return (
@@ -28,18 +28,18 @@ export default function JobCard({ job, index }) {
         </div>
         <div className="text-right flex flex-col items-end">
           <div className="px-4 py-2 rounded-2xl bg-blue-600 text-white font-black text-xl shadow-lg shadow-blue-200 dark:shadow-none">
-            {job.score.toFixed(0)}%
+            {typeof job?.score === "number" ? job.score.toFixed(0) : "0"}%
           </div>
           <span className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mt-2">Match</span>
         </div>
       </div>
 
       <p className="text-gray-500 dark:text-gray-400 leading-relaxed">
-        {job.description || "Leverage your expertise to drive innovation in this high-impact role. You'll collaborate with cross-functional teams to deliver exceptional solutions."}
+        {job?.description || "Leverage your expertise to drive innovation in this high-impact role. You'll collaborate with cross-functional teams to deliver exceptional solutions."}
       </p>
 
       <div className="space-y-4">
-        {job.matched_skills.length > 0 && (
+        {job?.matched_skills && job.matched_skills.length > 0 && (
           <div className="space-y-2">
             <p className="text-xs font-bold text-emerald-600 dark:text-emerald-500 uppercase tracking-wider flex items-center gap-2">
               <CheckCircle2 size={14} />
@@ -55,7 +55,7 @@ export default function JobCard({ job, index }) {
           </div>
         )}
 
-        {job.missing_skills.length > 0 && (
+        {job?.missing_skills && job.missing_skills.length > 0 && (
           <div className="space-y-2">
             <p className="text-xs font-bold text-amber-600 dark:text-amber-500 uppercase tracking-wider flex items-center gap-2">
               <AlertCircle size={14} />
@@ -70,15 +70,6 @@ export default function JobCard({ job, index }) {
             </div>
           </div>
         )}
-      </div>
-
-      <div className="mt-auto pt-6 border-t border-gray-50 dark:border-slate-800 flex items-center justify-between">
-        <button className="text-sm font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 flex items-center gap-2 transition-colors">
-          View Detailed Report <ChevronRight size={18} />
-        </button>
-        <button className="p-2 rounded-xl bg-gray-50 dark:bg-slate-800 text-gray-400 dark:text-gray-500 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-blue-600 dark:hover:text-blue-400 transition-all">
-          <ExternalLink size={18} />
-        </button>
       </div>
     </motion.div>
   );

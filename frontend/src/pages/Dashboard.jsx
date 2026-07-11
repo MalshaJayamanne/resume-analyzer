@@ -11,7 +11,7 @@ export default function Dashboard() {
 
   return (
     <MainLayout>
-      <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto">
         <header className="flex justify-between items-end mb-16">
           <div className="space-y-4">
             <h1 className="text-5xl font-black tracking-tight text-gray-900 dark:text-white leading-tight">
@@ -70,13 +70,28 @@ export default function Dashboard() {
                       />
                     </div>
 
-                    <div className="pt-10 border-t border-gray-100 dark:border-slate-800">
-                      <div className="mb-6 flex items-center justify-between">
-                        <span className="px-4 py-1.5 rounded-full bg-blue-600 text-white text-xs font-black uppercase tracking-widest shadow-lg shadow-blue-200">
-                          Top Recommendation
-                        </span>
+                    <div className="pt-10 border-t border-gray-100 dark:border-slate-800 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                      <div className="lg:col-span-2 flex flex-col justify-between">
+                        <div className="mb-6 flex items-center justify-between">
+                          <span className="px-4 py-1.5 rounded-full bg-blue-600 text-white text-xs font-black uppercase tracking-widest shadow-lg shadow-blue-200 dark:shadow-none">
+                            Top Recommendation
+                          </span>
+                        </div>
+                        <JobCard job={result.recommended_jobs[0]} index={0} />
                       </div>
-                      <JobCard job={result.recommended_jobs[0]} index={0} />
+                      
+                      <div className="flex flex-col justify-between p-8 rounded-[2.2rem] bg-slate-50/50 dark:bg-slate-950/20 border border-slate-100/80 dark:border-slate-900/50">
+                        <div>
+                          <h4 className="font-bold text-lg text-gray-900 dark:text-white mb-1">Skills Distribution</h4>
+                          <p className="text-xs text-gray-400 dark:text-gray-500 mb-6">Visual breakdown of matched vs growth areas</p>
+                        </div>
+                        <div className="flex-1 flex items-center justify-center">
+                          <SkillChart 
+                            skills={result.recommended_jobs[0]?.matched_skills || []} 
+                            missing={result.recommended_jobs[0]?.missing_skills || []} 
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
